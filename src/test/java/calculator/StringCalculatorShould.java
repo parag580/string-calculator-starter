@@ -68,5 +68,10 @@ class StringCalculatorShould {
 		StringCalculator.add("1,-2,7,-3,-10");
        
     }
+    @Test
+	public void ignoreNumbersAbove1000() {
+    	 assertEquals(2,StringCalculator.add("1002"));
+    	 
+	}
 
 }

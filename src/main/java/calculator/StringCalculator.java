@@ -31,15 +31,19 @@ private void ensureNoNegativeNumbers() {
 
 
 private IntStream getNumbers() {
+	if(numbers.isEmpty()) {
+        return IntStream.empty();
+}else{
 	return Arrays.stream(numbers.split(delimiter))
-			.mapToInt(Integer::parseInt);
+			.mapToInt(Integer::parseInt)
+			.map(n -> n%1000);
+}
 }
 	public static int add(String input) {
-	    	if(input.isEmpty())
-	        return 0;
 	    	
 	    	return parseInput(input).add();
 	}
+	
 	
 	private static StringCalculator parseInput(String input) {
 	    	
