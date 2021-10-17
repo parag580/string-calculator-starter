@@ -1,8 +1,11 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Rule;
 
 class StringCalculatorShould {
 
@@ -41,4 +44,18 @@ class StringCalculatorShould {
         
         assertEquals(3, StringCalculator.add("//;\n1;2"));
     }
-}
+    
+
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
+    
+    @Test
+    	 void throwsOnNegativeNumber() {
+    	expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("negative number: -3");
+
+    		StringCalculator.add("-3");
+    	}
+       
+    }
+
