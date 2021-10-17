@@ -23,4 +23,10 @@ class StringCalculatorShould {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(3, stringCalculator.add("1,2"));
     }
+    
+    @Test
+    void string_with_unkmown_amount_of_number_should_return_number_as_sum() {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertEquals(113, stringCalculator.add("1,2,50,60"));
+    }
 }
