@@ -46,16 +46,27 @@ class StringCalculatorShould {
     }
     
 
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
+	
     
-    @Test
+    @SuppressWarnings("null")
+	@Test
     	 void throwsOnNegativeNumber() {
-    	expectedException.expect(IllegalArgumentException.class);
+    	ExpectedException expectedException = null;
+		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("negative number: -3");
 
     		StringCalculator.add("-3");
     	}
+    
+    @SuppressWarnings("null")
+	@Test
+	public void throwsOnNegativeNumbersWithAllNumbersInExceptionMessage() {
+		ExpectedException expectedException = null;
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("negative number: -3,-5,-13");
+
+		StringCalculator.add("1,-2,7,-3,-10");
        
     }
 
+}

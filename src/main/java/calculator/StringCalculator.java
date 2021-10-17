@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -15,13 +16,21 @@ private String numbers;
 	this.numbers = numbers;
 }
 private int add() {
-	if(getNumber().anyMatch(n -> n <0)) {
-		throw new IllegalArgumentException();
+	ensureNoNegativeNumbers();
+	return getNumbers().sum();
 	}
-	return  getNumber().sum();
+
+private void ensureNoNegativeNumbers() {
+	String negativeNumberSequence = getNumbers().filter(n -> n < 0)
+			.mapToObj(Integer::toString)
+			.collect(Collectors.joining(","));
+	if (!negativeNumberSequence.isEmpty()) {
+		throw new IllegalArgumentException("negative number: " + negativeNumberSequence);
+	}
 }
 
-private IntStream getNumber() {
+
+private IntStream getNumbers() {
 	return Arrays.stream(numbers.split(delimiter))
 			.mapToInt(Integer::parseInt);
 }
