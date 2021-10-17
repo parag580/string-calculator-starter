@@ -35,4 +35,10 @@ class StringCalculatorShould {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(6, stringCalculator.add("1\n2,3"));
     }
+    
+    @Test
+    void delimiter_specified_between_number_should_return_number_as_sum() {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertEquals(3, stringCalculator.add("//;\n1;2"));
+    }
 }
