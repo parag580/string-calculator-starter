@@ -1,25 +1,43 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
-class StringCalculator {
 
-    public int add(String input) {
-    	if(input.isEmpty())
-        return 0;
-    	
-    	String delimiter=",|\n";
-    	if(input.startsWith("//")) {
-    		String[] parts = input.split("\n", 2);
-    		delimiter = parts[0].substring(2);
-    		input=parts[1];
-    	}
-    	
-    		Stream<String> numbers=Arrays.stream(input.split(delimiter));
-    		return numbers.mapToInt(Integer::parseInt).sum();
+public class StringCalculator {
+
+private String delimiter;
+private String numbers;
+
+	 private StringCalculator(String delimiter, String numbers) {
+	
+	this.delimiter = delimiter;
+	this.numbers = numbers;
+}
+private int sum() {
+	return Arrays.stream(numbers.split(delimiter)).mapToInt(Integer::parseInt).sum();
+}
+	public static int add(String input) {
+	    	if(input.isEmpty())
+	        return 0;
+	    	
+	    	return parseInput(input).sum();
+	}
+	
+	private static StringCalculator parseInput(String input) {
+	    	
+	    	if(input.startsWith("//")) {
+	    		String[] parts = input.split("\n", 2);
+	    		return new StringCalculator( parts[0].substring(2),parts[1]);
+	    	}else {
+	    		return new StringCalculator(",|\n",input);
+	    	}
+	    	
+	    	
+	    		
+	    	}
+    		
     		
     	}
     	
-    }
+    
 
