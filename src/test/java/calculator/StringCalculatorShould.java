@@ -5,7 +5,7 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Rule;
+
 
 class StringCalculatorShould {
 
@@ -72,6 +72,14 @@ class StringCalculatorShould {
 	public void ignoreNumbersAbove1000() {
     	 assertEquals(2,StringCalculator.add("1002"));
     	 
+	}
+    @Test
+	public void acceptsDelimiterOfArbitraryLength() {
+		assertEquals(6,StringCalculator.add("//[***]\n1***2***3"));
+	}
+    @Test
+	public void acceptsMultipleDelimiters() {
+		assertEquals(6,StringCalculator.add("//[**][%%]\\n1**2%%3"));
 	}
 
 }

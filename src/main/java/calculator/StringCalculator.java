@@ -1,8 +1,10 @@
 package calculator;
 
-import java.util.Arrays;
+
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 
 public class StringCalculator {
@@ -34,7 +36,7 @@ private IntStream getNumbers() {
 	if(numbers.isEmpty()) {
         return IntStream.empty();
 }else{
-	return Arrays.stream(numbers.split(delimiter))
+	return Stream.of(numbers.split(delimiter))
 			.mapToInt(Integer::parseInt)
 			.map(n -> n%1000);
 }
@@ -48,13 +50,25 @@ private IntStream getNumbers() {
 	private static StringCalculator parseInput(String input) {
 	    	
 	    	if(input.startsWith("//")) {
-	    		String[] parts = input.split("\n", 2);
-	    		return new StringCalculator( parts[0].substring(2),parts[1]);
+	    		String[] headerAndNumberSequence = input.split("\n", 2);
+				String delimiter = parseDelimiter(headerAndNumberSequence[0]);
+	    		return new StringCalculator( delimiter,headerAndNumberSequence[1]);
 	    	}else {
 	    		return new StringCalculator(",|\n",input);
 	    	}  	
 	    		
 	    	}
+	
+	
+	private static String parseDelimiter(String header) {
+		String delimiter = header.substring(2);
+		if (delimiter.startsWith("[")) {
+			delimiter = delimiter.substring(1, delimiter.length() - 1);
+		}
+		return Stream.of(delimiter.split("]\\["))
+				.map(Pattern::quote)
+				.collect(Collectors.joining("|"));
+	}
 	
 	}
     		
