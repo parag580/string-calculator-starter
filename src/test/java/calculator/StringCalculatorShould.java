@@ -85,7 +85,7 @@ class StringCalculatorShould {
     
     @Test
    	public void acceptsNumberAndIncrease() {
-   		assertEquals(9,StringCalculator.add("“+//[;]\\n1;2;3”"));
+   		assertEquals(9,StringCalculator.add("+//[;]\\n1;2;3"));
    	}
        
    	}
