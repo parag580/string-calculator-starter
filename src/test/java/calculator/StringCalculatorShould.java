@@ -40,6 +40,7 @@ class StringCalculatorShould {
     }
     
     @Test
+
     void delimiter_specified_between_number_should_return_number_as_sum() {
         
         assertEquals(3, StringCalculator.add("//;\n1;2"));
@@ -81,5 +82,11 @@ class StringCalculatorShould {
 	public void acceptsMultipleDelimiters() {
 		assertEquals(6,StringCalculator.add("//[**][%%]\\n1**2%%3"));
 	}
+    
+    @Test
+   	public void acceptsNumberAndIncrease() {
+   		assertEquals(9,StringCalculator.add("“+//[;]\\n1;2;3”"));
+   	}
+       
+   	}
 
-}

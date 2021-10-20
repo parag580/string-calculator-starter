@@ -38,7 +38,9 @@ private IntStream getNumbers() {
 }else{
 	return Stream.of(numbers.split(delimiter))
 			.mapToInt(Integer::parseInt)
-			.map(n -> n%1000);
+			.map(n ->n%1000)
+			;
+			
 }
 }
 	public static int add(String input) {
@@ -49,12 +51,12 @@ private IntStream getNumbers() {
 	
 	private static StringCalculator parseInput(String input) {
 	    	
-	    	if(input.startsWith("//")) {
+	    	if(input.startsWith("+|//")) {
 	    		String[] headerAndNumberSequence = input.split("\n", 2);
 				String delimiter = parseDelimiter(headerAndNumberSequence[0]);
 	    		return new StringCalculator( delimiter,headerAndNumberSequence[1]);
 	    	}else {
-	    		return new StringCalculator(",|\n",input);
+	    		return new StringCalculator("\n|,",input);
 	    	}  	
 	    		
 	    	}
